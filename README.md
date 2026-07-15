@@ -278,9 +278,3 @@ MongoDB Atlas
 **Dhana Teja Naga Varma Gadiraju**
 
 Internship Assignment – **Nexoraa Technosolve**
-
----
-
-# 📄 License
-
-This project is developed for educational and internship evaluation purposes.
