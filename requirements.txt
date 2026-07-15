@@ -1,0 +1,23 @@
+flask
+Flask==3.1.1
+Flask-Bcrypt==1.0.1
+Flask-JWT-Extended==4.7.1
+Flasgger==0.9.7.1
+pymongo==4.13.2
+python-dotenv==1.1.1
+
+# AI
+google-genai==1.24.0
+
+# RAG
+chromadb==1.0.15
+sentence-transformers==5.0.0
+
+# Machine Learning
+torch
+transformers
+
+# Utilities
+numpy
+pandas
+pypdf
