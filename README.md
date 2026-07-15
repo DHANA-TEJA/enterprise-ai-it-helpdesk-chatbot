@@ -2,7 +2,7 @@
 
 An AI-powered Enterprise IT Helpdesk Chatbot developed as an internship assignment for **Nexoraa Technosolve**.
 
-The application provides intelligent IT support using **Google Gemini AI**, **Retrieval-Augmented Generation (RAG)**, **MongoDB Atlas**, and **Flask REST APIs**. It also includes ticket management, asset management, conversation history, authentication, and an admin dashboard.
+The system assists employees in resolving IT issues using **Google Gemini AI** with **Retrieval-Augmented Generation (RAG)**. If an issue cannot be resolved, it automatically creates an IT support ticket. The application also provides authentication, asset management, conversation history, dashboard analytics, and REST APIs documented with Swagger.
 
 ---
 
@@ -12,7 +12,7 @@ The application provides intelligent IT support using **Google Gemini AI**, **Re
 - User Registration
 - User Login
 - JWT Authentication
-- Role-Based Access (Foundation)
+- Role-based user information
 
 ---
 
@@ -21,33 +21,35 @@ The application provides intelligent IT support using **Google Gemini AI**, **Re
 - Retrieval-Augmented Generation (RAG)
 - ChromaDB Vector Database
 - Enterprise Knowledge Base
-- Context-Aware Responses
+- Intelligent troubleshooting
+- Automatic ticket creation for unresolved issues
 
 ---
 
 ## 🎫 Ticket Management
-- Create Support Tickets
-- Automatic Ticket Creation from Chatbot
-- Ticket Priority Detection
-- Update Ticket Status
-- View All Tickets
+- Create IT support tickets
+- View all tickets
+- Update ticket status
+- Automatic priority detection
+- Automatic ticket generation from chatbot
 
 ---
 
 ## 💻 Asset Management
-- Add Assets
-- View Assets
-- Asset Inventory using MongoDB Atlas
+- Add enterprise assets
+- View assets
+- Store asset inventory in MongoDB Atlas
 
 ---
 
 ## 💬 Conversation History
-- Save User Conversations
-- Retrieve Previous Chats
+- Store chatbot conversations
+- Retrieve previous conversations
+- Track whether a ticket was created
 
 ---
 
-## 📊 Dashboard
+## 📊 Admin Dashboard
 - Total Users
 - Total Tickets
 - Open Tickets
@@ -58,12 +60,12 @@ The application provides intelligent IT support using **Google Gemini AI**, **Re
 ---
 
 ## 📄 API Documentation
-- Swagger UI
-- RESTful APIs
+- Swagger UI Documentation
+- RESTful API Design
 
 ---
 
-# 🛠️ Tech Stack
+# 🛠️ Technology Stack
 
 ## Backend
 - Python
@@ -74,10 +76,10 @@ The application provides intelligent IT support using **Google Gemini AI**, **Re
 ## Database
 - MongoDB Atlas
 
-## AI
+## Artificial Intelligence
 - Google Gemini API
 
-## RAG
+## Retrieval-Augmented Generation
 - ChromaDB
 - Sentence Transformers
 
@@ -104,10 +106,14 @@ enterprise-ai-it-helpdesk-chatbot
 │   └── config.py
 │
 ├── knowledge_base
-├── app.py
-├── requirements.txt
+├── screenshots
 ├── README.md
-└── .env.example
+├── DATABASE_SCHEMA.md
+├── SAMPLE_CONVERSATIONS.md
+├── Dockerfile
+├── requirements.txt
+├── .env.example
+└── app.py
 ```
 
 ---
@@ -138,6 +144,16 @@ python -m venv venv
 venv\Scripts\activate
 ```
 
+### Linux / macOS
+
+```bash
+python3 -m venv venv
+```
+
+```bash
+source venv/bin/activate
+```
+
 ---
 
 ## Install Dependencies
@@ -157,7 +173,7 @@ SECRET_KEY=your_secret_key
 
 JWT_SECRET_KEY=your_jwt_secret_key
 
-MONGO_URI=your_mongodb_atlas_uri
+MONGO_URI=your_mongodb_atlas_connection_string
 
 GEMINI_API_KEY=your_gemini_api_key
 ```
@@ -170,7 +186,7 @@ GEMINI_API_KEY=your_gemini_api_key
 python app.py
 ```
 
-Server runs at
+Application runs at:
 
 ```
 http://127.0.0.1:5000
@@ -178,9 +194,9 @@ http://127.0.0.1:5000
 
 ---
 
-# 📘 Swagger API Documentation
+# 📘 API Documentation
 
-Open
+Swagger UI:
 
 ```
 http://127.0.0.1:5000/apidocs
@@ -190,6 +206,8 @@ http://127.0.0.1:5000/apidocs
 
 # 🗄️ MongoDB Collections
 
+The project uses the following collections:
+
 - users
 - tickets
 - assets
@@ -197,10 +215,13 @@ http://127.0.0.1:5000/apidocs
 
 ---
 
-# 🔄 System Workflow
+# 🔄 Application Workflow
 
 ```
 Employee
+     │
+     ▼
+Login
      │
      ▼
 AI Chatbot
@@ -209,72 +230,116 @@ AI Chatbot
 Knowledge Retrieval (RAG)
      │
      ▼
-Gemini AI
+Google Gemini AI
      │
      ▼
-Resolved?
-   │        │
- Yes       No
-  │         │
-  ▼         ▼
-Answer   Create Ticket
-             │
-             ▼
-MongoDB Atlas
+Issue Resolved?
+     │
+ ┌───┴─────────┐
+ │             │
+Yes           No
+ │             │
+ ▼             ▼
+Answer     Create Ticket
+               │
+               ▼
+          MongoDB Atlas
+               │
+               ▼
+        Dashboard & History
 ```
 
 ---
 
-# 📌 Main APIs
+# 📌 REST APIs
 
 ## Authentication
-- POST `/auth/register`
-- POST `/auth/login`
-- GET `/auth/profile`
+
+| Method | Endpoint |
+|----------|-----------|
+| POST | `/auth/register` |
+| POST | `/auth/login` |
+| GET | `/auth/profile` |
 
 ---
 
 ## Chatbot
-- POST `/chat`
+
+| Method | Endpoint |
+|----------|-----------|
+| POST | `/chat` |
 
 ---
 
 ## Tickets
-- POST `/tickets`
-- GET `/tickets`
-- PUT `/tickets/{ticket_id}`
+
+| Method | Endpoint |
+|----------|-----------|
+| POST | `/tickets` |
+| GET | `/tickets` |
+| PUT | `/tickets/{ticket_id}` |
 
 ---
 
 ## Assets
-- POST `/assets`
-- GET `/assets`
+
+| Method | Endpoint |
+|----------|-----------|
+| POST | `/assets` |
+| GET | `/assets` |
 
 ---
 
 ## Conversations
-- GET `/conversations`
+
+| Method | Endpoint |
+|----------|-----------|
+| GET | `/conversations` |
 
 ---
 
 ## Dashboard
-- GET `/dashboard`
+
+| Method | Endpoint |
+|----------|-----------|
+| GET | `/dashboard` |
 
 ---
 
-# 🚀 Future Enhancements
+# 📚 Additional Documents
 
+The repository also includes:
+
+- `DATABASE_SCHEMA.md`
+- `SAMPLE_CONVERSATIONS.md`
+- `.env.example`
+- `Dockerfile`
+- `knowledge_base/`
+- Swagger API Documentation
+
+---
+
+# 🚀 Future Improvements
+
+- Advanced RBAC
 - Email Notifications
-- Ticket Assignment Engine
+- Ticket Assignment Workflow
 - Asset-aware AI Responses
-- Advanced Role-Based Access Control
 - Analytics Dashboard
 - Multi-Agent AI Support
 
 ---
 
-# 👨‍💻 Developed By
+# 👨‍💻 Author
 
 **Dhana Teja Naga Varma Gadiraju**
 
-Internship Assignment – **Nexoraa Technosolve**
+Internship Assignment Submission
+
+**Nexoraa Technosolve**
+
+---
+
+# 📄 License
+
+This project was developed for educational and internship evaluation purposes.
